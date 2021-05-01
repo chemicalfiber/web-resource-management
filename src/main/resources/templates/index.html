@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>功能选择</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <style>
+        .flexible{
+            display: flex;
+        }
+        .flexible>a{
+            flex: 1;
+            margin: 30px;
+            height: 300px;
+            font-size: 40px;
+            line-height: 300px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="flexible">
+        <a href="/toUpload" class="btn btn-lg btn-danger">去上传页面</a>
+        <a href="/toDownload" class="btn btn-lg btn-success">去下载页面</a>
+    </div>
+    <div class="flexible">
+        <a href="/toUploadInfo" class="btn btn-lg btn-primary">去上传日志页面</a>
+        <a href="/toDownloadInfo" class="btn btn-lg btn-warning">去下载日志页面</a>
+    </div>
+</div>
+</body>
+</html>
