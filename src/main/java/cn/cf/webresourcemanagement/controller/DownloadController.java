@@ -43,7 +43,8 @@ public class DownloadController {
             // 用户路径是「%userprofile%」，在Java中使用该环境变量时，无需声明百分号
             System.out.println("当前操作系统的用户目录是：" + System.getenv("userprofile"));
             // Windows用户请检查你的注册表！如果你的桌面路径被手动设置过，或者使用盗版GHOST操作系统，「桌面」路径大概率不在「%userprofile%\Desktop」路径下
-            // 这将会导致「java.io.fileNotFoundException」
+            // Windows「桌面」路径的精确查找方法：查看注册表的「HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders」下的「Desktop」值
+            // 这可能会导致「java.io.fileNotFoundException」
             dirPath = System.getenv("userprofile") + "/Desktop/downloadFile/";
             System.out.println("文件将会从这个地址开始下载：" + dirPath);
         }else{

@@ -37,7 +37,7 @@ public class UploadController {
             // Windows下，用户名是「%username%」,可以根据用户名拼接用户路径
             // 用户路径是「%userprofile%」，在Java中使用该环境变量时，无需声明百分号
             System.out.println("当前操作系统的用户目录是：" + System.getenv("userprofile"));
-            dirPath = System.getenv("userprofile") + "/uploadFile/"; // TODO：Windows下可能会出现FileNotFoundException
+            dirPath = System.getenv("userprofile") + "/uploadFile/";
             System.out.println("上传文件保存的路径是：" + dirPath);
         }else{
             // 在Mac或Linux中，用户名是「$USER」,可以根据用户名拼接用户路径
