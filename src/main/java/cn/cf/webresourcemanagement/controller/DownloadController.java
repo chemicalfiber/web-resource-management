@@ -46,7 +46,6 @@ public class DownloadController {
             // Windows「桌面」路径的精确查找方法：查看注册表的「HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders」下的「Desktop」值
             // 这可能会导致「java.io.fileNotFoundException」
             dirPath = System.getenv("userprofile") + "/Desktop/downloadFile/";
-            System.out.println("文件将会从这个地址开始下载：" + dirPath);
         }else{
             // 在Mac或Linux中，用户名是「$USER」,可以根据用户名拼接用户路径
             // 用户目录是「$HOME」，这里直接使用「$HOME」
@@ -54,8 +53,8 @@ public class DownloadController {
             // 这将会导致「java.io.fileNotFoundException」
             System.out.println("当前操作系统的用户目录是：" + System.getenv("HOME"));
             dirPath = System.getenv("HOME") + "/Desktop/downloadFile/";
-            System.out.println("文件将会从这个地址开始下载：" + dirPath);
         }
+        System.out.println("文件将会从这个地址开始下载：" + dirPath);
         // 创建文件对象
         File file = new File(dirPath + File.separator + filename);
         // 设置响应头
