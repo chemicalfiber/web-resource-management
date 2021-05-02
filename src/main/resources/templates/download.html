@@ -2,23 +2,24 @@
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <title>文件下载</title>
 </head>
-<body>
-    <div style="margin-bottom: 10px;">文件下载列表：</div>
-    <table>
+<body class="container">
+    <h2 th:if="${fileList.size()==0}">您似乎没有准备提供下载的文件！</h2>
+    <table class="table table-striped table-hover table-responsive"  th:if="${fileList.size()>0}">
+        <thead>
         <tr>
-            <td>unnamed.jpg</td>
-            <td><a th:href="@{/download(filename='unnamed.jpg')}">下载文件</a></td>
+            <th>文件名称</th>
+            <th>操作</th>
         </tr>
-        <tr>
-            <td>真正的赛博朋克.jpeg</td>
-            <td><a th:href="@{/download(filename='真正的赛博朋克.jpeg')}">下载文件</a></td>
+        </thead>
+        <tbody>
+        <tr th:each="List:${fileList}">
+            <td th:text="${List}">暂无</td>
+            <td><a th:href="@{/download(filename = fileList)}">下载文件</a></td>
         </tr>
-        <tr>
-            <td>本项目的说明文档.md</td>
-            <td><a th:href="@{/download(filename='本项目的说明文档.md')}">下载文件</a></td>
-        </tr>
+        </tbody>
     </table>
 </body>
 </html>
