@@ -42,6 +42,8 @@ public class DownloadController {
             File fs = fa[i];
             if (fs.isDirectory()) {
                 System.out.println(fs.getName() + " （是目录，不支持下载）");
+            } else if(fs.getName().startsWith("._")||fs.getName().equals(".DS_Store")){
+                System.out.println(fs.getName() + " （是无效文件，不添加到可下载列表）");
             } else {
                 System.out.println("添加文件：" + fs.getName());
                 // TODO：识别不必要的文件系统系统/操作系统标示文件，防止其被错误地添加到下载列表中，例如：「.DS_Store」(MacOS Spotlight索引文件)
@@ -49,6 +51,7 @@ public class DownloadController {
             }
         }
         model.addAttribute("fileList",fileList);
+        System.out.println("=================");
         return "download";
     }
     // 文件下载管理
@@ -74,6 +77,7 @@ public class DownloadController {
         downloadInfo.setDownloadtime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
         downloadInfo.setDownloadip(request.getRemoteAddr());
         downloadInfoRepository.save(downloadInfo);
+        System.out.println("=================");
         try{
             // 此处的「FileUtils」类属于「org.apache.commons.io.FileUtils」包
             return new ResponseEntity<>(FileUtils.readFileToByteArray(file),httpHeaders, HttpStatus.OK);

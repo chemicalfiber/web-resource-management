@@ -17,7 +17,7 @@
         <tbody>
         <tr th:each="List:${fileList}">
             <td th:text="${List}">暂无</td>
-            <td><a th:href="@{/download(filename = fileList)}">下载文件</a></td>
+            <td><a th:href="@{/download(filename = ${List})}">下载文件</a></td>
         </tr>
         </tbody>
     </table>
