@@ -2,6 +2,7 @@ package cn.cf.webresourcemanagement.controller;
 
 import cn.cf.webresourcemanagement.eneity.FileInfo;
 import cn.cf.webresourcemanagement.repository.FileInfoRepository;
+import cn.cf.webresourcemanagement.util.GetPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,24 +30,8 @@ public class UploadController {
         // 默认上传成功，返回状态信息
         model.addAttribute("uploadStatus","上传成功！");
         // 指定文件上传目录，不存在就新建一个
-        String dirPath = "";
-        // 获取运行当前程序的操作系统名称
-        String systemName = System.getProperty("os.name");
-        // 判断操作系统类型
-        if (systemName.contains("Windows")){
-            // Windows下，用户名是「%username%」,可以根据用户名拼接用户路径
-            // 用户路径是「%userprofile%」，在Java中使用该环境变量时，无需声明百分号
-            System.out.println("当前操作系统的用户目录是：" + System.getenv("userprofile"));
-            dirPath = System.getenv("userprofile") + "/Desktop/uploadFile/";
-            System.out.println("上传文件保存的路径是：" + dirPath);
-        }else{
-            // 在Mac或Linux中，用户名是「$USER」,可以根据用户名拼接用户路径
-            // 用户目录是「$HOME」，这里直接使用「$HOME」
-            System.out.println("当前操作系统的用户目录是：" + System.getenv("HOME"));
-            dirPath = System.getenv("HOME") + "/Desktop/uploadFile/";
-            System.out.println("上传文件保存的路径是：" + dirPath);
-        }
-        //
+        String dirPath = GetPath.getUploadPath();
+        // 遍历上传的文件，并写入本地磁盘
         for (MultipartFile file : fileUpload){
             // 获取文件名和后缀名
             String fileName = file.getOriginalFilename();
