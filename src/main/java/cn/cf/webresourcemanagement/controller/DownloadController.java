@@ -59,8 +59,16 @@ public class DownloadController {
         System.out.println("要下载的文件名是：" + filename);
         // 指定要下载的文件的根路径
 //        你需要提前将提供下载的文件放到你的桌面下的「downloadFile」文件夹下
-        String dirPath = GetPath.getDownloadPath();
-        System.out.println("文件将会从这个地址开始下载：" + dirPath);
+        String dirPath;
+        // 如果是从上传日志页面进行文件下载，则从前端传回来的filename参数会带有UUID，UUID和文件名的分隔符是在第36号索引上的下划线「_」
+        // 如果是从上传日志页面进行文件下载，就拼接上传文件夹uploadFile的路径
+        if (filename.toCharArray().length>36&&filename.toCharArray()[36]=='_'){
+            dirPath = GetPath.getUploadPath();
+        // 如果是从下载文件页面进行的普通下载，就拼接下载提供文件夹downloadFile的路径
+        }else{
+            dirPath = GetPath.getDownloadPath();
+        }
+        System.out.println("文件将会从这个路径开始下载：" + dirPath);
         // 创建文件对象
         File file = new File(dirPath + File.separator + filename);
         // 设置响应头
@@ -72,6 +80,7 @@ public class DownloadController {
         httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         // 将下载日志写入数据库
         DownloadInfo downloadInfo = new DownloadInfo();
+        // TODO：解决将上传的文件重新下载回来的时候，存在的UUID
         downloadInfo.setName(file.getName());   // 并不直接使用filename，因为此时的filename是响应头中的乱码
         downloadInfo.setDownloadtime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
         downloadInfo.setDownloadip(request.getRemoteAddr());
