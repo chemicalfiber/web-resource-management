@@ -62,7 +62,8 @@ public class DownloadController {
         String dirPath;
         // 如果是从上传日志页面进行文件下载，则从前端传回来的filename参数会带有UUID，UUID和文件名的分隔符是在第36号索引上的下划线「_」
         // 如果是从上传日志页面进行文件下载，就拼接上传文件夹uploadFile的路径
-        if (filename.toCharArray().length>36&&filename.toCharArray()[36]=='_'){
+        char[] chars = filename.toCharArray();
+        if (chars.length>36&&chars[36]=='_'){
             dirPath = GetPath.getUploadPath();
         // 如果是从下载文件页面进行的普通下载，就拼接下载提供文件夹downloadFile的路径
         }else{
@@ -74,13 +75,17 @@ public class DownloadController {
         // 设置响应头
         HttpHeaders httpHeaders = new HttpHeaders();
         // 通知浏览器将返回的数据以下载形式打开
-        filename = getFilename(request,filename);
+        // 如果是从上传日志页面进行下载，先将UUID处理掉，避免客户端下载的文件带有无意义的UUID
+        if (chars.length>36&&chars[36]=='_'){
+            filename = getFilename(request,(filename.substring(37)));  // 如果从36号索引开始截取，会包含下划线，故从37号索引开始截取
+        }else {
+            filename = getFilename(request,filename);
+        }
         httpHeaders.setContentDispositionFormData("attachment",filename);
         // 定义以流的形式下载返回文件数据
         httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         // 将下载日志写入数据库
         DownloadInfo downloadInfo = new DownloadInfo();
-        // TODO：解决将上传的文件重新下载回来的时候，存在的UUID
         downloadInfo.setName(file.getName());   // 并不直接使用filename，因为此时的filename是响应头中的乱码
         downloadInfo.setDownloadtime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
         downloadInfo.setDownloadip(request.getRemoteAddr());
