@@ -17,10 +17,6 @@ public class UploadList {
     @GetMapping("/list")
     public String toUploadList(Model model){
         List<FileInfo> uploadInfoList = fileInfoRepository.findAll();
-        for (FileInfo fileInfo : uploadInfoList) {
-            String[] split = fileInfo.getFilename().split("_");
-            fileInfo.setFilename(split[split.length - 1]);   //将数据库中的信息取出，文件名使用下划线「_」分割，只取后面的文件名，舍弃UUID
-        }
         model.addAttribute("uploadList",uploadInfoList);
         return "list";
     }
