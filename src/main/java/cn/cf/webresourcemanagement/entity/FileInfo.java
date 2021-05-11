@@ -1,4 +1,4 @@
-package cn.cf.webresourcemanagement.eneity;
+package cn.cf.webresourcemanagement.entity;
 
 import javax.persistence.*;
 

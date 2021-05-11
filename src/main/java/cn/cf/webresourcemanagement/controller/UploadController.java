@@ -1,6 +1,6 @@
 package cn.cf.webresourcemanagement.controller;
 
-import cn.cf.webresourcemanagement.eneity.FileInfo;
+import cn.cf.webresourcemanagement.entity.FileInfo;
 import cn.cf.webresourcemanagement.repository.FileInfoRepository;
 import cn.cf.webresourcemanagement.util.GetPath;
 import org.springframework.beans.factory.annotation.Autowired;

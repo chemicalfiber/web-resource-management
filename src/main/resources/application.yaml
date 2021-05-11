@@ -1,0 +1,22 @@
+server:
+  # 服务开启的端口
+  port: 8080
+spring:
+  # MySql数据库连接配置
+  # 「&useUnicode=true&characterEncoding=UTF-8」用于解决中文乱码问题
+  # 「WebResourceManagement」是数据库名
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/WebResourceManagement?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: root
+  thymeleaf:
+  # 配置后缀
+    suffix: .html
+  # 配置Thymeleaf缓存
+    cache: false
+  servlet:
+    multipart:
+      # 配置单个文件大小限制（默认是1MB）
+      max-file-size: 10MB
+      # 配置总上传文件大小限制（默认是10MB）
+      max-request-size: 50MB

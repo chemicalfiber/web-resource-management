@@ -1,6 +1,6 @@
 package cn.cf.webresourcemanagement.controller;
 
-import cn.cf.webresourcemanagement.eneity.DownloadInfo;
+import cn.cf.webresourcemanagement.entity.DownloadInfo;
 import cn.cf.webresourcemanagement.repository.DownloadInfoRepository;
 import cn.cf.webresourcemanagement.util.GetPath;
 import org.apache.commons.io.FileUtils;

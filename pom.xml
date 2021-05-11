@@ -10,7 +10,7 @@
     </parent>
     <groupId>cn.cf</groupId>
     <artifactId>web-resource-management</artifactId>
-    <version>1.0</version>
+    <version>1.0.2</version>
     <name>WebResourceManagement</name>
     <description>An awesome web resource management system</description>
     <properties>
